@@ -1,8 +1,8 @@
 # Team 1526C - BHS HexaDecimators
 
-VEX Robotics\
-Autonomous and driver control code for competition\
-Used for collaboration within callcentersquad
+VEX Robotics: Tipping Point 
+Autonomous and Driver Control Code by Team 1526C (CallCenterSquad)
 
--- Soham
+Reach out to us via instagram: @callcentersquad
+
 
