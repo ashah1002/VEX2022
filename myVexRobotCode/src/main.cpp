@@ -11,10 +11,9 @@
 // Robot Configuration:
 // [Name]               [Type]        [Port(s)]
 // Drivetrain           drivetrain    1, 3            
-// Intake               motor         7               
-// MiddleWheel          motor         9               
 // Controller1          controller                    
 // Forklift             motor_group   4, 5            
+// Middle               motor         9               
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
 #include "vex.h"
@@ -39,7 +38,6 @@ competition Competition;
 void pre_auton(void) {
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
-
   // All activities that occur before the competition starts
   // Example: clearing encoders, setting servo positions, ...
 }
@@ -61,13 +59,20 @@ void autonomous(void) {
   // My autonomous code below should drive the robot forward 6 feet, pick up a mobile goal, and then drive back.
   Brain.Screen.print("Hello World!");
   Drivetrain.driveFor(forward,72, inches);
-  Forklift.spinFor(forward, 1, turns);
-  Intake.spin(forward);
+  Forklift.spinFor(forward, 90, degrees);
+  
   Drivetrain.turnFor(left, 180, degrees);
   Drivetrain.driveFor(forward, 72, inches);
   Forklift.spinFor(reverse, 1, turns);
-  Intake.stop();
+
   Drivetrain.turnFor(left, 180, degrees);
+
+  Drivetrain.driveFor(forward, 72, inches);
+  Drivetrain.turnFor(left,90,degrees);
+  Drivetrain.driveFor(forward,18,inches);
+  Forklift.spinFor(forward,90,degrees);
+  Drivetrain.turnFor(left,90,degrees);
+  Drivetrain.driveFor(forward,48,inches);
   
 }
 
@@ -92,7 +97,9 @@ void usercontrol(void) {
     // Insert user code here. This is where you use the joystick values to
     // update your motors, etc.
     // ........................................................................
-    
+    if(Controller1.ButtonR1.pressing()){
+      Forklift.spin(forward);
+    }
     wait(20, msec); // Sleep the task for a short amount of time to
                     // prevent wasted resources.
   }
@@ -108,7 +115,10 @@ int main() {
 
   // Run the pre-autonomous function.
   pre_auton();
-
+  
+  autonomous();
+  wait(15, sec);
+  usercontrol();
   // Prevent main from exiting with an infinite loop.
   while (true) {
     wait(100, msec);

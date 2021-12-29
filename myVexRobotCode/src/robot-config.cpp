@@ -8,15 +8,14 @@ using code = vision::code;
 brain  Brain;
 
 // VEXcode device constructors
-motor LeftDriveSmart = motor(PORT1, ratio18_1, false);
-motor RightDriveSmart = motor(PORT3, ratio18_1, true);
+motor LeftDriveSmart = motor(PORT1, ratio18_1, true);
+motor RightDriveSmart = motor(PORT3, ratio18_1, false);
 drivetrain Drivetrain = drivetrain(LeftDriveSmart, RightDriveSmart, 319.19, 295, 40, mm, 1);
-motor Intake = motor(PORT7, ratio18_1, false);
-motor MiddleWheel = motor(PORT9, ratio18_1, false);
 controller Controller1 = controller(primary);
-motor ForkliftMotorA = motor(PORT4, ratio18_1, false);
-motor ForkliftMotorB = motor(PORT5, ratio18_1, false);
+motor ForkliftMotorA = motor(PORT4, ratio36_1, false);
+motor ForkliftMotorB = motor(PORT5, ratio36_1, false);
 motor_group Forklift = motor_group(ForkliftMotorA, ForkliftMotorB);
+motor Middle = motor(PORT9, ratio18_1, false);
 
 // VEXcode generated functions
 // define variable for remote controller enable/disable
@@ -24,7 +23,6 @@ bool RemoteControlCodeEnabled = true;
 // define variables used for controlling motors based on controller inputs
 bool Controller1LeftShoulderControlMotorsStopped = true;
 bool Controller1RightShoulderControlMotorsStopped = true;
-bool Controller1XBButtonsControlMotorsStopped = true;
 bool DrivetrainNeedsToBeStopped_Controller1 = true;
 
 // define a task that will handle monitoring inputs from Controller1
@@ -64,15 +62,15 @@ int rc_auto_loop_function_Controller1() {
         RightDriveSmart.setVelocity(drivetrainRightSideSpeed, percent);
         RightDriveSmart.spin(forward);
       }
-      // check the ButtonL1/ButtonL2 status to control MiddleWheel
+      // check the ButtonL1/ButtonL2 status to control Middle
       if (Controller1.ButtonL1.pressing()) {
-        MiddleWheel.spin(forward);
+        Middle.spin(forward);
         Controller1LeftShoulderControlMotorsStopped = false;
       } else if (Controller1.ButtonL2.pressing()) {
-        MiddleWheel.spin(reverse);
+        Middle.spin(reverse);
         Controller1LeftShoulderControlMotorsStopped = false;
       } else if (!Controller1LeftShoulderControlMotorsStopped) {
-        MiddleWheel.stop();
+        Middle.stop();
         // set the toggle so that we don't constantly tell the motor to stop when the buttons are released
         Controller1LeftShoulderControlMotorsStopped = true;
       }
@@ -87,18 +85,6 @@ int rc_auto_loop_function_Controller1() {
         Forklift.stop();
         // set the toggle so that we don't constantly tell the motor to stop when the buttons are released
         Controller1RightShoulderControlMotorsStopped = true;
-      }
-      // check the ButtonX/ButtonB status to control Intake
-      if (Controller1.ButtonX.pressing()) {
-        Intake.spin(forward);
-        Controller1XBButtonsControlMotorsStopped = false;
-      } else if (Controller1.ButtonB.pressing()) {
-        Intake.spin(reverse);
-        Controller1XBButtonsControlMotorsStopped = false;
-      } else if (!Controller1XBButtonsControlMotorsStopped) {
-        Intake.stop();
-        // set the toggle so that we don't constantly tell the motor to stop when the buttons are released
-        Controller1XBButtonsControlMotorsStopped = true;
       }
     }
     // wait before repeating the process
