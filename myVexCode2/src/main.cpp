@@ -1,3 +1,12 @@
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Drivetrain           drivetrain    1, 3            
+// Intake               motor         7               
+// MiddleWheel          motor         9               
+// Controller1          controller                    
+// Forklift             motor_group   4, 5            
+// ---- END VEXCODE CONFIGURED DEVICES ----
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*    Module:       main.cpp                                                  */
