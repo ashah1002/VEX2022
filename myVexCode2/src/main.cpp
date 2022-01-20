@@ -5,7 +5,6 @@
 /*    Author:       Team 1526C - BHS HexaDecimators                           */
 /*    Created:      Monday, December 13, 2021                                 */
 /*                                                                            */
-/*                                                                            */
 /*----------------------------------------------------------------------------*/
 
 // ---- START VEXCODE CONFIGURED DEVICES ----
@@ -25,7 +24,6 @@ using namespace vex;
 // A global instance of competition
 competition Competition;
 
-
 // define your global instances of motors and other devices here
 
 // PRE-AUTONOMOUS CODE
@@ -42,16 +40,15 @@ void autonomous(void) {
   Forklift.setVelocity(100,percent);
  
   Brain.Screen.print("Hello World!");
+  Forklift.spinFor(reverse,20,turns);
 
   //Drivetrain.driveFor(forward,60, inches);
-  Forklift.spinFor(reverse,20,turns);
   //Intake.spin(forward);
   //Drivetrain.turnFor(left, 180, degrees);
   //Drivetrain.driveFor(forward, 60, inches);
   //Forklift.spinFor(reverse, 90, degrees);
   //Intake.stop();
   //Drivetrain.turnFor(left, 180, degrees);
-  
 }
 
 // DRIVER CONTROL
@@ -61,22 +58,20 @@ void usercontrol(void) {
   while (1) {
 
     Brain.Screen.print("Finished");
-
     Drivetrain.setDriveVelocity(100,percent);
     Intake.setVelocity(100,percent);
     MiddleWheel.setVelocity(100,percent);
     Forklift.setVelocity(100,percent);
- 
 
     wait(20, msec);                
   }
 }
 
 //
-// Main will set up the competition functions and callbacks.
+// Set up competition functions and callbacks.
 //
 int main() {
-  // Set up callbacks for autonomous and driver control periods.
+  // Set up callbacks for autonomous and driver control.
   Competition.autonomous(autonomous);
   Competition.drivercontrol(usercontrol);
 
