@@ -21,39 +21,48 @@
 
 using namespace vex;
 
-// A global instance of competition 
+// A global instance of competition
 competition Competition;
+
+// define your global instances of motors and other devices here
 
 // PRE-AUTONOMOUS CODE
 
-void pre_auton(void) {vexcodeInit();}
+void pre_auton(void) {
+  // Initializing Robot Configuration. DO NOT REMOVE!
+  vexcodeInit();
+}
 
-void autodrive(void) {
+// AUTONOMOUS CODE
 
-  Drivetrain.setDriveVelocity(100,percent);
-  Intake.setVelocity(100,percent);
-  MiddleWheel.setVelocity(100,percent);
+void autonomous(void) {
+  // GOAL: My autonomous code below should drive the robot forward 6 feet, pick up a mobile goal, and then drive back.
   Forklift.setVelocity(100,percent);
-  
-  //Basic Autonomous Code 
-  //Plan: Drop Forklift, Go to Goal, Pick up Goal, Turn, Turn on Intake, Go Forward and Collect Rings
-  Brain.Screen.print("Autonomous");
-  Forklift.spinFor(forward,160,degrees);
-  Drivetrain.driveFor(forward,60, inches);
-  Forklift.spinFor(reverse,160,degrees);
-  Drivetrain.turnFor(right,90,degrees);
-  Intake.spin(reverse);
-  Drivetrain.driveFor(forward,10,inches);
-  Intake.stop();
+ 
+  Brain.Screen.print("Hello World!");
+  Forklift.spinFor(reverse,20,turns);
+
+  //Drivetrain.driveFor(forward,60, inches);
+  //Intake.spin(forward);
+  //Drivetrain.turnFor(left, 180, degrees);
+  //Drivetrain.driveFor(forward, 60, inches);
+  //Forklift.spinFor(reverse, 90, degrees);
+  //Intake.stop();
+  //Drivetrain.turnFor(left, 180, degrees);
 }
 
 // DRIVER CONTROL
 
 void usercontrol(void) {
-  while (1) { 
+  // User control code here, inside the loop
+  while (1) {
 
-    Brain.Screen.print("Driver in Control");
-    // Switched Driver Control Code to the controller method which works better
+    Brain.Screen.print("Finished");
+    Drivetrain.setDriveVelocity(100,percent);
+    Intake.setVelocity(100,percent);
+    MiddleWheel.setVelocity(100,percent);
+    Forklift.setVelocity(100,percent);
+
     wait(20, msec);                
   }
 }
@@ -63,13 +72,13 @@ void usercontrol(void) {
 //
 int main() {
   // Set up callbacks for autonomous and driver control.
-  Competition.autonomous(autodrive);
+  Competition.autonomous(autonomous);
   Competition.drivercontrol(usercontrol);
 
   // Run the pre-autonomous function.
   pre_auton();
-  autodrive();
-  usercontrol();
+  //autonomous(); // I just added this in, it might make the autonomous part actually run
+
   // Prevent main from exiting with an infinite loop.
   while (true) {
     wait(100, msec);
