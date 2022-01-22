@@ -44,7 +44,7 @@ void autodrive(void) {
   Drivetrain.turnFor(left, 90, degrees);
   Intake.spin(reverse);
   Drivetrain.driveFor(reverse,10, inches);
-  Intake.stop()
+  Intake.stop();
 }
   
 void usercontrol(void) {
