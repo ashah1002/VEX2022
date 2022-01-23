@@ -45,13 +45,18 @@ void autodrive(void) {
   Intake.spin(reverse);
   Drivetrain.driveFor(reverse,10, inches);
   Intake.stop();
+  
 }
   
 void usercontrol(void) {
   while (1) {
 
     Brain.Screen.print("Driver in Control"); // Replaced code w/ the controller menu being set-up
-  
+    Controller1.L1.pressed;
+    if(true) {
+      Forklift.spinFor(forward,160,degrees);
+    }
+    }
     wait(20, msec);                
   }
 }
