@@ -26,7 +26,8 @@ competition Competition;
 
 // PRE-AUTONOMOUS CODE
 
-void pre_auton(void) {vexcodeInit();
+void pre_auton(void) {
+  vexcodeInit();
   Forklift.setPosition(0, degrees);
 }
 
@@ -51,11 +52,15 @@ void autodrive(void) {
 }
   
 void fldown(void) {
-   Forklift.spinTo(85, degrees);
+   if(Forklift.rotation(deg) != 85) {
+     Forklift.spinToPosition(85, degrees);
+   }
 }
 
 void flup(void) {
-  Forklift.spinTo(25, degrees);
+  if(Forklift.rotation(deg) != 25) {
+    Forklift.spinToPosition(25, degrees);
+   }
 }
 
 void usercontrol(void) {
