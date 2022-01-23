@@ -9,11 +9,11 @@
  // ---- START VEXCODE CONFIGURED DEVICES ----
 // Robot Configuration:
 // [Name]               [Type]        [Port(s)]
+// Controller1          controller                    
 // Drivetrain           drivetrain    1, 3            
 // Forklift             motor_group   4, 5            
 // Intake               motor         7               
 // MiddleWheel          motor         9               
-// Controller1          controller                    
 // ---- END VEXCODE CONFIGURED DEVICES ----
 
  #include "vex.h"
@@ -62,6 +62,8 @@
    if(Forklift.rotation(deg) < downchange && Forklift.rotation(deg) < 70 && down == false) {
      Forklift.spinFor(forward,downchange,degrees);
      down = true;
+     wait(1,sec);
+     down = false;
    }
  }
 
@@ -69,6 +71,8 @@
    if(Forklift.rotation(deg) > downchange && Forklift.rotation(deg) > 70 && up == false) {
      Forklift.spinFor(reverse,downchange,degrees);
      up = true;
+     wait(1,sec);
+     up = false;
    }
  }
 
@@ -104,15 +108,5 @@
    // Prevent main from exiting with an infinite loop.
    while (true) {
      wait(100, msec);
-
-     if(up == true) {
-       wait(1,sec);
-       up = false;
-     }
-
-     if(down == true) {
-       wait(1,sec);
-       up = false;
-     }
    }
  }
