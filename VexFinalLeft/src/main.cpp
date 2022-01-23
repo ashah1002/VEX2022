@@ -26,7 +26,9 @@ competition Competition;
 
 // PRE-AUTONOMOUS CODE
 
-void pre_auton(void) {vexcodeInit();}
+void pre_auton(void) {vexcodeInit();
+  Forklift.setPosition(0, degrees);
+}
 
 void autodrive(void) {
   // Autonomous Code
@@ -49,18 +51,17 @@ void autodrive(void) {
 }
   
 void fldown(void) {
-   Forklift.spinFor(forward,160,degrees);
+   Forklift.spinTo(85, degrees);
 }
 
 void flup(void) {
-  Forklift.spinFor(reverse,160,degrees);
-
+  Forklift.spinTo(25, degrees);
 }
 
 void usercontrol(void) {
   while (1) {
 
-    Brain.Screen.print("Driver in Control"); // Replaced code w/ the controller menu being set-up
+    // Brain.Screen.print("Driver in Control"); // Replaced code w/ the controller menu being set-up
     Controller1.ButtonL1.pressed(flup);
     Controller1.ButtonL2.pressed(fldown);
   
