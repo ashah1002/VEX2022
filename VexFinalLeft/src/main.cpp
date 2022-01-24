@@ -58,12 +58,14 @@ void fldown(void) {
   if(Forklift.rotation(deg) != 85) {
     Forklift.spinToPosition(85,degrees);
   }
+  wait(20,msec);
 }
 
 void flup(void) {
   if(Forklift.rotation(deg) != 25) {
     Forklift.spinToPosition(25,degrees);
   }
+  wait(20,msec);
 }
 
 void usercontrol(void) {
