@@ -8,12 +8,12 @@ using code = vision::code;
 brain  Brain;
 
 // VEXcode device constructors
+motor LeftDriveSmart = motor(PORT1, ratio18_1, false);
+motor RightDriveSmart = motor(PORT3, ratio18_1, true);
+drivetrain Drivetrain = drivetrain(LeftDriveSmart, RightDriveSmart, 319.19, 295, 40, mm, 1);
 motor ForkliftMotorA = motor(PORT4, ratio18_1, true);
 motor ForkliftMotorB = motor(PORT5, ratio18_1, false);
 motor_group Forklift = motor_group(ForkliftMotorA, ForkliftMotorB);
-motor LeftDriveSmart = motor(PORT1, ratio6_1, false);
-motor RightDriveSmart = motor(PORT3, ratio6_1, true);
-drivetrain Drivetrain = drivetrain(LeftDriveSmart, RightDriveSmart, 319.19, 295, 40, mm, 1);
 motor Intake = motor(PORT7, ratio18_1, false);
 motor MiddleWheel = motor(PORT9, ratio18_1, false);
 controller Controller1 = controller(primary);
